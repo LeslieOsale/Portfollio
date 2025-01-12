@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Coding Expert</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f4f4f4;
+    }
+
+    h1, h2 {
+      font-family: 'Tangerine', cursive;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  text-align: center;
+  background: linear-gradient(to right, rgb(3, 80, 11), black, rgb(3, 80, 11));
+  color: white;
+}
+
+.navbar .logo {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2rem; /* Smaller, more readable font size */
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.navbar ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  margin-top: 0.5rem;
+}
+
+.navbar ul li {
+  margin: 0 1rem;
+}
+
+.navbar ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.5rem; /* Increased size for section names */
+  font-family: 'Tangerine', cursive;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.navbar ul li a:hover {
+  color: #00bcd4;
+  transform: scale(1.1);
+}
+
+/* Mobile menu toggle */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.menu-toggle span {
+  height: 3px;
+  width: 25px;
+  background-color: #fff;
+  margin: 4px 0;
+  transition: 0.3s;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar ul {
+    display: none;
+    flex-direction: column;
+    background: linear-gradient(to right, rgb(3, 80, 11), black, rgb(3, 80, 11));
+    width: 100%;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    align-items: center;
+    animation: slide-down 0.5s ease;
+  }
+
+  .navbar ul.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+}
+
+/* Animations */
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    /* Hero Section */
+    #hero {
+      background: url('https://res.cloudinary.com/dwpr0xrjq/image/upload/v1736143864/beautiful-waterfall-flowers-water-nature-waterfall-hd-wallpaper-ai-generated-free-photo_hamthi.jpg') no-repeat center center/cover;
+      color: #fff;
+      text-align: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 1rem;
+    }
+
+    #hero h1 {
+      font-size: 3rem;
+    }
+
+    #hero p {
+      margin: 1rem 0 2rem;
+      font-size: 1.2rem;
+    }
+
+    #hero .cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    #hero .btn {
+      padding: 0.8rem 1.5rem;
+      color: #fff;
+      border: 2px solid #fff;
+      background: transparent;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    #hero .btn:hover {
+      background: rgb(3, 80, 11);
+      border-color: #00c6ff;
+    }
+
+    /* About Section */
+    #about {
+      padding: 4rem 0;
+      background: #fff;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    #about .bio {
+      flex: 1;
+    }
+
+    #about .bio h2 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: rgb(3, 80, 11);
+      font-weight: bold;
+    }
+
+    #about .bio p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    #about .profile-picture {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #about .profile-picture img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Expertise Section */
+    #expertise {
+      padding: 3rem 0;
+      background: #f9f9f9;
+    }
+
+    #expertise h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: rgb(3, 80, 11);
+    }
+
+    .language {
+      margin-bottom: 2rem;
+    }
+
+    .language label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+
+    .percentage {
+      text-align: right;
+      margin-bottom: 0.3rem;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    .progress-bar {
+      background: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      height: 20px;
+    }
+
+    .progress-bar div {
+      height: 100%;
+      background: rgb(3, 80, 11);
+      width: 0;
+      transition: width 1s;
+    }
+
+   /* Projects Section */
+#projects {
+    background: #fff;
+    padding: 4rem 0;
+  }
+  
+  #projects h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: rgb(3, 80, 11);
+  }
+  
+  .scroll-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .projects-scroll {
+    display: flex; /* Horizontal layout */
+    gap: 2rem;
+    overflow-x: auto; /* Horizontal scrolling */
+    padding: 1rem;
+    scroll-behavior: smooth;
+    flex: 1;
+  }
+  
+  .projects-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .projects-scroll::-webkit-scrollbar-thumb {
+    background: rgb(3, 80, 11);
+    border-radius: 4px;
+  }
+  
+  .project-card {
+    flex: 0 0 auto;
+    width: 300px;
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .project-card img {
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .project-card h3 {
+    margin: 1rem 0 0.5rem; /* Reduce bottom margin slightly */
+    color: #333;
+  }
+  
+  .project-card p {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1rem; /* Added bottom margin */
+  }
+  
+  .project-card .btn {
+    margin-top: 1.5rem; /* Increased top margin */
+    padding: 0.5rem 1.5rem;
+    color: #fff;
+    background: rgb(3, 80, 11);
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  
+  .project-card .btn:hover {
+    background: rgb(5, 138, 18);
+  }
+  
+  .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgb(3, 80, 11);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+  
+  .scroll-btn:hover {
+    background: rgb(5, 138, 18);
+  }
+  
+  .left-btn {
+    left: 0.5rem;
+  }
+  
+  .right-btn {
+    right: 0.5rem;
+  }
+
+  /* Progress Container */
+.progress-container {
+    text-align: center;
+  }
+  
+  /* Circular Progress (Hollow) */
+  .circular-progress {
+    --progress: 0; /* Progress percentage */
+    width: 120px;
+    height: 120px;
+    background: conic-gradient(
+      rgb(3, 80, 11) calc(var(--progress) * 1%), /* Gradient for progress */
+      rgba(220, 220, 220, 0.2) calc(var(--progress) * 1%) 100% /* Grey remainder */
+    );
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(255, 255, 0, 0.5); /* Yellow glow */
+    transition: background 1s ease-out; /* Smooth progress animation */
+  }
+  
+  .circular-progress::before {
+    content: '';
+    width: 90px; /* Inner hollow circle size */
+    height: 90px;
+    background: #f7f7f7; /* Matches the page background */
+    border-radius: 50%;
+    position: absolute;
+    z-index: 1;
+  }
+  
+  /* Percentage Label (in the center) */
+  .circular-progress .progress-value {
+    position: relative;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: rgb(3, 80, 11);
+    text-shadow: 0 0 3px rgba(255, 255, 0, 0.8); /* Optional yellow text glow */
+    z-index: 2;
+  }
+  
+  /* Glow Effect on Hover */
+  .circular-progress:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 0, 0.7);
+  }
+  
+  /* Description Text */
+  .progress-container p {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: rgb(3, 80, 11);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .circular-progress {
+      width: 100px;
+      height: 100px;
+    }
+    .circular-progress::before {
+      width: 75px;
+      height: 75px;
+    }
+    .circular-progress .progress-value {
+      font-size: 0.9rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .circular-progress {
+      width: 80px;
+      height: 80px;
+    }
+    .circular-progress::before {
+      width: 60px;
+      height: 60px;
+    }
+    .circular-progress .progress-value {
+      font-size: 0.8rem;
+    }
+  }
+  
+    /* Contact Section */
+    #contact {
+      padding: 4rem 0;
+      background: #f9f9f9;
+    }
+
+    #contact h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2rem;
+      color: rgb(3, 80, 11);
+    }
+
+    form input, form textarea, form button {
+      width: 100%;
+      padding: 1rem;
+      margin: 1rem 0;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    form button {
+      background: rgb(3, 80, 11);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    form button:hover {
+      background: rgb(3, 80, 11);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      background: #333;
+      color: #fff;
+    }
+    #contact {
+        background-color: #333;
+    }
+    #contact h2 {
+        color: #ffcc00;
+        margin-bottom: 15px;
+      }
+  
+      #contact p {
+        margin: 5px 0;
+        font-size: 18px;
+      }
+  
+      #contact a {
+        color: #ffcc00;
+        text-decoration: none;
+      }
+  
+      #contact a:hover {
+        text-decoration: underline;
+      }
+
+      .whatsapp-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        animation: bounce 2s infinite;
+      }
+  
+      .whatsapp-button img {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+      }
+  
+      @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-10px);
+        }
+        60% {
+          transform: translateY(-5px);
+        }
+      }
+  
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">Portfolio</div>
+    <ul id="menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact Me</a></li>
+    </ul>
+    <div class="menu-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+  
+  <!-- Hero Section -->
+  <header id="hero">
+    <div class="container">
+      <h1>Coding Expert in <span>Vast Languages</span></h1>
+      <p>Hi, I'm Leslie Osale. <br> I combine creativity and data-driven insights to create impactful experiences.</p>
+      <div class="cta">
+        <a href="#expertise" class="btn">View Expertise</a>
+        <a href="#projects" class="btn">Projects</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <div class="bio">
+        <h2>Welcome to My Digital Realm</h2>
+      <p>Hello, I'm Leslie Osale, a passionate coding expert who turns lines of code into impactful solutions. My expertise spans across various programming languages, empowering me to tackle challenges in web design, data science, and beyond.</p>
+      <p>From creating seamless user interfaces to unraveling complex data sets, I bring innovation and dedication to every project I undertake. Let's transform ideas into reality, one script at a time.</p>
+      <p>Stark is my nickname after my fictional mentor Eng. Tony Stark</p>
+      <p>"Code is not just my profession; it's my art."</p>
+      </div>
+      <div class="profile-picture">
+        <img src="https://res.cloudinary.com/dwpr0xrjq/image/upload/v1688550825/WhatsApp_Image_2023-07-05_at_12.50.34_whptuf.jpg" alt="Profile Picture">
+      </div>
+    </div>
+  </section>
+
+  <!-- Expertise Section -->
+  <section id="expertise">
+    <div class="container">
+      <h2>My Expertise</h2>
+      <div class="language">
+        <div class="percentage">75%</div>
+        <label>Python</label>
+        <div class="progress-bar"><div style="width: 75%;"></div></div>
+      </div>
+      <div class="language">
+        <div class="percentage">78%</div>
+        <label>JavaScript</label>
+        <div class="progress-bar"><div style="width: 78%;"></div></div>
+      </div>
+      <div class="language">
+        <div class="percentage">90%</div>
+        <label>HTML & CSS</label>
+        <div class="progress-bar"><div style="width: 90%;"></div></div>
+      </div>
+      <div class="language">
+        <div class="percentage">75%</div>
+        <label>SQL</label>
+        <div class="progress-bar"><div style="width: 75%;"></div></div>
+      </div>
+      <div class="language">
+        <div class="percentage">60%</div>
+        <label>Java</label>
+        <div class="progress-bar"><div style="width: 60%;"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <div id="projects">
+        <h2>Projects</h2>
+        <div class="scroll-wrapper">
+          <button class="scroll-btn left-btn" onclick="scrollProjects(-300)">&#8249;</button>
+          <div class="projects-scroll">
+            <div class="project-card">
+              <img src="https://res.cloudinary.com/dwpr0xrjq/image/upload/v1736362907/Screenshot_2025-01-08_220043_msap01.png" alt="Starkville Adventures Website">
+              <h3>Starkville Adventures Website</h3>
+              <p>A dynamic and user-friendly website for Starkville Adventures, featuring trip details, membership plans, and a seamless booking system. Explore fun and exciting adventures with just a click!</p>
+              <a href="https://leslieosale.github.io/starkvilleadventures/" class="btn">View</a>
+            </div>
+            <div class="project-card">
+              <img src="https://res.cloudinary.com/dwpr0xrjq/image/upload/v1736364582/Screenshot_2025-01-08_222848_aot1pc.png" alt="Expense Tracker">
+              <h3>Expense Tracker</h3>
+              <p>A responsive web application to track your income and expenses with graphs and analytics for better financial management. Built with HTML, CSS, and JavaScript, it dynamically updates transaction records and visualizations using Chart.js.</p>
+              <a href="#" class="btn">View</a>
+            </div>
+            <div class="project-card">
+              <img src="https://res.cloudinary.com/dwpr0xrjq/image/upload/v1736498005/header-img-data-analytics-course-inchandigarh_skws1a.jpg" alt="Economic Pulse">
+              <h3>Economic Pulse</h3>
+              <p>Analyzing Growth Drivers and Fiscal Dynamics.<br> Exploring the variables shaping economic growth and fiscal policy effectiveness.</p>
+              <a href="#" class="btn">View</a>
+            </div>
+            <div class="project-card">
+                <img src="https://res.cloudinary.com/dwpr0xrjq/image/upload/v1736528833/62-Employee-task-tracker_awynsh.png" alt="Starkville Adventures Website">
+                <h3>Task Tracker</h3>
+                <p>A Python GUI app built with Tkinter for managing tasks. Features include adding, deleting, and viewing tasks in a scrollable, resizable list with persistent JSON storage. </p>
+                <a href="#" class="btn">Request</a>
+              </div>
+              <div class="project-card">
+                <img src="https://res.cloudinary.com/dwpr0xrjq/image/upload/v1736674060/images_1_vhccdt.jpg" alt="Starkville Adventures Website">
+                <h3>Trading Bots</h3>
+                <p>The Bot provides real-time candlestick charts, multi-pair monitoring, and automated trading analysis using Binance API data.</p>
+                <a href="#" class="btn">View</a>
+              </div>
+              <div class="project-card">
+                <img src="https://res.cloudinary.com/dwpr0xrjq/image/upload/v1736154185/starkvillle_tech_u9q65k.png" alt="Starkville Adventures Website">
+                <h3>title</h3>
+                <p>description</p>
+                <a href="#" class="btn">View</a>
+              </div>
+          </div>
+          <button class="scroll-btn right-btn" onclick="scrollProjects(300)">&#8250;</button>
+        </div>
+      </div>
+      <div class="progress-container">
+        <div class="circular-progress" style="--progress: 20">
+          <span class="progress-value">20%</span>
+        </div>
+        <p>5 of 20 Projects Completed</p>
+      </div>
+  </section>
+   
+
+  <!-- Contact Section -->
+  <section id="contact2">
+    <div class="container">
+      <h2>Contact Me</h2>
+      <form id="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <a href="https://wa.me/254705809412" class="whatsapp-button">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+  </a>
+
+  <footer>
+    <section id="contact">
+        <h2>Contact Information</h2>
+        <p>Phone: 0705809412 / 0114414306</p>
+        <p>Email: <a href="mailto:megamindosale@gmail.com">megamindosale@gmail.com</a></p>
+      </section>
+    <p>&copy; 2025 Leslie Osale. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Smooth scrolling for projects
+    function scrollProjects(scrollOffset) {
+      const projectsContainer = document.querySelector('.projects-scroll');
+      if (projectsContainer) {
+        projectsContainer.scrollBy({
+          left: scrollOffset,
+          behavior: 'smooth',
+        });
+      } else {
+        console.error('Projects container not found.');
+      }
+    }
+  
+    // JavaScript for menu toggle
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      if (menu) {
+        menu.classList.toggle('active');
+      } else {
+        console.error('Menu element not found.');
+      }
+    }
+  
+    // Progress Bar for Projects
+    window.onload = function () {
+      const projectProgress = document.getElementById('project-progress');
+      if (projectProgress) {
+        let width = 0;
+        const interval = setInterval(() => {
+          if (width >= 70) { // Set to 70% as an example
+            clearInterval(interval);
+          } else {
+            width++;
+            projectProgress.style.width = width + '%';
+          }
+        }, 30);
+      } else {
+        console.error('Progress bar element not found.');
+      }
+    };
+  
+    // Form Submission Alert
+    const contactForm = document.getElementById("contact-form");
+    if (contactForm) {
+      contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert("Thank you for reaching out! I'll get back to you soon.");
+      });
+    } else {
+      console.error('Contact form element not found.');
+    }
+  
+    // Additional interactivity for WhatsApp button
+    const whatsappButton = document.querySelector('.whatsapp-button');
+    if (whatsappButton) {
+      whatsappButton.addEventListener('click', () => {
+        console.log('WhatsApp button clicked!');
+      });
+    } else {
+      console.error('WhatsApp button element not found.');
+    }
+  </script>
+  
+</body>
+</html>
