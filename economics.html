@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Regression with Background Video</title>
+  <title>Interactive Economic Analysis</title>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
   <style>
@@ -12,9 +12,9 @@
       padding: 0;
       font-family: Arial, sans-serif;
       color: white;
+      background: #000;
       overflow-x: hidden;
     }
-    /* Background Video */
     #bgVideo {
       position: fixed;
       top: 0;
@@ -24,7 +24,6 @@
       z-index: -1;
       object-fit: cover;
     }
-    /* Dark overlay for readability */
     #overlay {
       position: fixed;
       top: 0;
@@ -50,77 +49,109 @@
     .controls {
       margin: 20px auto;
       max-width: 800px;
-      text-align: center;
       color: white;
     }
-    .controls input {
-      margin: 10px;
-      width: 300px;
-    }
-    .metrics {
+    .chart-container {
       margin: 20px auto;
+      max-width: 900px;
+    }
+    .chart-container canvas {
+      width: 100% !important;
+    }
+    .interpretation {
       max-width: 800px;
-      text-align: left;
+      margin: 20px auto;
       background: rgba(0, 0, 0, 0.8);
       padding: 15px;
       border-radius: 10px;
     }
-    .chart-container {
+    table {
       width: 100%;
-      max-width: 800px;
-      margin: auto;
+      border-collapse: collapse;
+      margin: 10px 0;
+      text-align: left;
+    }
+    table th, table td {
+      padding: 8px;
+      border: 1px solid #444;
+    }
+    table th {
+      background-color: #555;
     }
     footer {
       background-color: #111;
       color: white;
       text-align: center;
       padding: 10px 0;
-      margin-top: 40px;
+    }
+    @media (max-width: 480px) {
+      .chart-container {
+        max-width: 100%;
+        overflow-x: scroll;
+      }
+      header h1 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
 
 <!-- Background Video -->
-<video autoplay muted loop id="bgVideo">
+<video autoplay muted loop id="bgVideo" poster="fallback.jpg">
   <source src="https://res.cloudinary.com/dwpr0xrjq/video/upload/v1733732461/bg2_qyldnu.mp4" type="video/mp4">
 </video>
 <div id="overlay"></div>
 
 <header>
-  <h1>Interactive Regression Analysis</h1>
-  <p>Adjust coefficients and explore statistical metrics in real-time.</p>
+  <h1>Interactive Economic Analysis</h1>
+  <p>Explore the relationships between economic indicators and consumer spending.</p>
 </header>
 
 <main>
+  <!-- Controls for Adjusting Coefficients -->
   <section class="controls">
-    <h3>Adjust Parameters</h3>
-    <label for="sizeCoeff">Size Coefficient:</label>
-    <input type="range" id="sizeCoeff" min="50" max="300" value="150">
-    <span id="sizeCoeffValue">150</span><br>
+    <h3>Adjust Coefficients</h3>
+    <label for="gdpCoeff">GDP Coefficient:</label>
+    <input type="range" id="gdpCoeff" min="50" max="300" value="150">
+    <span id="gdpCoeffValue">150</span><br>
 
-    <label for="bedroomCoeff">Bedroom Coefficient:</label>
-    <input type="range" id="bedroomCoeff" min="5000" max="20000" value="10000">
-    <span id="bedroomCoeffValue">10000</span><br>
+    <label for="inflationCoeff">Inflation Coefficient:</label>
+    <input type="range" id="inflationCoeff" min="-200" max="-50" value="-100">
+    <span id="inflationCoeffValue">-100</span><br>
 
-    <label for="basePrice">Base Price:</label>
-    <input type="range" id="basePrice" min="20000" max="100000" value="50000">
-    <span id="basePriceValue">50000</span><br>
-
-    <label for="noiseLevel">Noise Level:</label>
-    <input type="range" id="noiseLevel" min="0" max="20000" value="5000">
-    <span id="noiseLevelValue">5000</span><br>
-
-    <h3>Upload CSV</h3>
-    <input type="file" id="csvFile" accept=".csv">
+    <label for="unemploymentCoeff">Unemployment Coefficient:</label>
+    <input type="range" id="unemploymentCoeff" min="-10000" max="-1000" value="-5000">
+    <span id="unemploymentCoeffValue">-5000</span>
   </section>
 
-  <div id="regressionChart" class="chart-container"></div>
+  <!-- 3D and 2D Plots -->
+  <div id="regression3D" class="chart-container"></div>
+  <div id="gdpScatter" class="chart-container"></div>
+  <div id="inflationScatter" class="chart-container"></div>
+  <div id="unemploymentScatter" class="chart-container"></div>
 
-  <section class="metrics">
-    <h3>Statistical Metrics</h3>
-    <p><strong>R²:</strong> <span id="rSquared">0.00</span></p>
-    <p><strong>RMSE:</strong> <span id="rmse">0.00</span></p>
+  <!-- Dataset Example -->
+  <section class="interpretation">
+    <h3>Dataset Example and Interpretation</h3>
+    <p><strong>Sample Dataset:</strong></p>
+    <table>
+      <thead>
+        <tr>
+          <th>GDP Growth (%)</th>
+          <th>Inflation (%)</th>
+          <th>Unemployment (%)</th>
+          <th>Consumer Spending ($)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>2.5</td><td>1.8</td><td>4.5</td><td>25000</td></tr>
+        <tr><td>3.0</td><td>2.0</td><td>5.0</td><td>27000</td></tr>
+        <tr><td>1.5</td><td>1.5</td><td>6.0</td><td>24000</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Interpretation:</strong> Adjusting GDP, inflation, and unemployment coefficients shows their impact on consumer spending. For instance, a high GDP growth rate generally increases spending, while higher inflation or unemployment rates decrease it.</p>
+    <p>The R² value indicates how well the model explains the variation in spending, and RMSE shows the prediction error.</p>
   </section>
 </main>
 
@@ -129,112 +160,119 @@
 </footer>
 
 <script>
-  let sizes, bedrooms, prices, basePrice = 50000, sizeCoeff = 150, bedroomCoeff = 10000, noiseLevel = 5000;
+  let gdpGrowth, inflationRate, unemploymentRate, consumerSpending;
+  let gdpCoeff = 150, inflationCoeff = -100, unemploymentCoeff = -5000;
 
-  function generateSimulatedData() {
+  function generateData() {
     const numPoints = 100;
-    sizes = Array.from({ length: numPoints }, () => Math.random() * 500 + 500); // Sizes in sq ft
-    bedrooms = Array.from({ length: numPoints }, () => Math.random() * 5 + 1); // Bedrooms
-    prices = sizes.map((size, i) =>
-      basePrice + sizeCoeff * size + bedroomCoeff * bedrooms[i] + Math.random() * noiseLevel - noiseLevel / 2
+    gdpGrowth = Array.from({ length: numPoints }, () => Math.random() * 5); // GDP growth (%)
+    inflationRate = Array.from({ length: numPoints }, () => Math.random() * 3); // Inflation (%)
+    unemploymentRate = Array.from({ length: numPoints }, () => Math.random() * 5); // Unemployment (%)
+    consumerSpending = gdpGrowth.map((gdp, i) =>
+      gdpCoeff * gdp + inflationCoeff * inflationRate[i] + unemploymentCoeff * unemploymentRate[i]
     );
   }
 
-  function calculateMetrics(predictedPrices) {
-    const meanPrice = prices.reduce((sum, p) => sum + p, 0) / prices.length;
-    const ssTotal = prices.reduce((sum, p) => sum + (p - meanPrice) ** 2, 0);
-    const ssResidual = prices.reduce((sum, p, i) => sum + (p - predictedPrices[i]) ** 2, 0);
-    const rSquared = 1 - ssResidual / ssTotal;
-    const rmse = Math.sqrt(ssResidual / prices.length);
-    return { rSquared, rmse };
-  }
-
-  function updateRegressionPlane() {
-    const predictedPrices = sizes.map((size, i) =>
-      basePrice + sizeCoeff * size + bedroomCoeff * bedrooms[i]
+  function updateCharts() {
+    const predictedSpending = gdpGrowth.map((gdp, i) =>
+      gdpCoeff * gdp + inflationCoeff * inflationRate[i] + unemploymentCoeff * unemploymentRate[i]
     );
 
-    const { rSquared, rmse } = calculateMetrics(predictedPrices);
-    document.getElementById("rSquared").innerText = rSquared.toFixed(2);
-    document.getElementById("rmse").innerText = rmse.toFixed(2);
-
-    const dataPoints = {
-      x: sizes,
-      y: bedrooms,
-      z: prices,
-      mode: "markers",
-      type: "scatter3d",
-      marker: { color: "blue", size: 4 },
-      name: "Observed Data"
-    };
-
-    const regressionPlane = {
-      x: sizes,
-      y: bedrooms,
-      z: predictedPrices,
-      type: "mesh3d",
-      opacity: 0.5,
-      color: "orange",
-      name: "Regression Plane"
-    };
-
-    const layout = {
-      title: "3D Multiple Linear Regression",
-      scene: {
-        xaxis: { title: "Size (sq ft)" },
-        yaxis: { title: "Bedrooms" },
-        zaxis: { title: "House Price ($)" }
+    // Regression 3D Scatter Plot
+    Plotly.newPlot("regression3D", [
+      {
+        x: gdpGrowth,
+        y: inflationRate,
+        z: consumerSpending,
+        mode: "markers",
+        type: "scatter3d",
+        marker: { size: 4, color: "blue" },
+        name: "Observed Data"
+      },
+      {
+        x: gdpGrowth,
+        y: inflationRate,
+        z: predictedSpending,
+        type: "mesh3d",
+        opacity: 0.5,
+        color: "orange",
+        name: "Regression Plane"
       }
-    };
+    ], {
+      title: "3D Regression Plot",
+      scene: {
+        xaxis: { title: "GDP Growth (%)" },
+        yaxis: { title: "Inflation (%)" },
+        zaxis: { title: "Consumer Spending ($)" }
+      }
+    });
 
-    Plotly.newPlot("regressionChart", [dataPoints, regressionPlane], layout);
+    // GDP Scatter Plot
+    Plotly.newPlot("gdpScatter", [
+      {
+        x: gdpGrowth,
+        y: consumerSpending,
+        mode: "markers",
+        type: "scatter",
+        marker: { size: 6, color: "blue" }
+      }
+    ], {
+      title: "GDP Growth vs. Consumer Spending",
+      xaxis: { title: "GDP Growth (%)" },
+      yaxis: { title: "Consumer Spending ($)" }
+    });
+
+    // Inflation Scatter Plot
+    Plotly.newPlot("inflationScatter", [
+      {
+        x: inflationRate,
+        y: consumerSpending,
+        mode: "markers",
+        type: "scatter",
+        marker: { size: 6, color: "green" }
+      }
+    ], {
+      title: "Inflation vs. Consumer Spending",
+      xaxis: { title: "Inflation (%)" },
+      yaxis: { title: "Consumer Spending ($)" }
+    });
+
+    // Unemployment Scatter Plot
+    Plotly.newPlot("unemploymentScatter", [
+      {
+        x: unemploymentRate,
+        y: consumerSpending,
+        mode: "markers",
+        type: "scatter",
+        marker: { size: 6, color: "red" }
+      }
+    ], {
+      title: "Unemployment vs. Consumer Spending",
+      xaxis: { title: "Unemployment (%)" },
+      yaxis: { title: "Consumer Spending ($)" }
+    });
   }
 
-  function handleCSVUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-      Papa.parse(file, {
-        header: true,
-        dynamicTyping: true,
-        complete: (results) => {
-          sizes = results.data.map(row => row.Size);
-          bedrooms = results.data.map(row => row.Bedrooms);
-          prices = results.data.map(row => row.Price);
-          updateRegressionPlane();
-        }
-      });
-    }
-  }
-
-  document.getElementById("sizeCoeff").addEventListener("input", (event) => {
-    sizeCoeff = Number(event.target.value);
-    document.getElementById("sizeCoeffValue").innerText = sizeCoeff;
-    updateRegressionPlane();
+  document.getElementById("gdpCoeff").addEventListener("input", (event) => {
+    gdpCoeff = Number(event.target.value);
+    document.getElementById("gdpCoeffValue").innerText = gdpCoeff;
+    updateCharts();
   });
 
-  document.getElementById("bedroomCoeff").addEventListener("input", (event) => {
-    bedroomCoeff = Number(event.target.value);
-    document.getElementById("bedroomCoeffValue").innerText = bedroomCoeff;
-    updateRegressionPlane();
+  document.getElementById("inflationCoeff").addEventListener("input", (event) => {
+    inflationCoeff = Number(event.target.value);
+    document.getElementById("inflationCoeffValue").innerText = inflationCoeff;
+    updateCharts();
   });
 
-  document.getElementById("basePrice").addEventListener("input", (event) => {
-    basePrice = Number(event.target.value);
-    document.getElementById("basePriceValue").innerText = basePrice;
-    updateRegressionPlane();
+  document.getElementById("unemploymentCoeff").addEventListener("input", (event) => {
+    unemploymentCoeff = Number(event.target.value);
+    document.getElementById("unemploymentCoeffValue").innerText = unemploymentCoeff;
+    updateCharts();
   });
 
-  document.getElementById("noiseLevel").addEventListener("input", (event) => {
-    noiseLevel = Number(event.target.value);
-    document.getElementById("noiseLevelValue").innerText = noiseLevel;
-    generateSimulatedData();
-    updateRegressionPlane();
-  });
-
-  document.getElementById("csvFile").addEventListener("change", handleCSVUpload);
-
-  generateSimulatedData();
-  updateRegressionPlane();
+  generateData();
+  updateCharts();
 </script>
 
 </body>
